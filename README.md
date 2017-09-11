@@ -1,6 +1,6 @@
 # SFAttachmentsDownload
 #### Purpose:
-Downloads all Customer's attachments (not that are in emails).
+Download all Customer's attachments (that displayed as separate emails) to current folder and upload them on ftp.
 
 #### Prerequisites:
 FTP for case should be created in advance.  
