@@ -16,10 +16,10 @@ class SfDownload {
       if (!fileName.contains("/")) {
         println(fileName)
         println(listOfLinksAndFtp._2)
-        s"$curl -o $fileName $link".!!
-        s"$curl -T $fileName ${listOfLinksAndFtp._2}".!!
+        s"$curl -o $fileName $link".!! //download locally
+        s"$curl -T $fileName ${listOfLinksAndFtp._2}".!! //upload to ftp
         val file = new File(fileName)
-        if (file.exists) file.delete
+        if (file.exists) file.delete //delete file locally if needed
       }
     }
   }

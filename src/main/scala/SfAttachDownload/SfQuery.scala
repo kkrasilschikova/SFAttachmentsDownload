@@ -6,6 +6,7 @@ import com.sforce.soap.partner.{PartnerConnection, QueryResult}
 class SfQuery {
   def prepareResults(connection: Try[PartnerConnection], caseNumber: String): (List[List[String]], String)= {
 
+    //find all emails, then filter only that have attachments
     val xmlResult: QueryResult = connection.get
       .query(s"select (select Subject, HTMLBody from EmailMessages order by CreatedDate) from Case where CaseNumber='$caseNumber'")
     val emailMessages: com.sforce.ws.bind.XmlObject=(for (record<-xmlResult.getRecords) yield record.getChild("EmailMessages")).toList.head
@@ -29,6 +30,7 @@ class SfQuery {
     val regex = "'http.*'".r
     val listOfLinks: List[List[String]] = allLinks.map(x=>regex.findAllIn(x).toList.map(_.replace("'", "")))
 
+    //find ftp link with password
     val xmlFtp: QueryResult = connection.get.query(s"Select LogLocationFtpURL__c from Case where CaseNumber='$caseNumber'")
     val ftp: String =(for (record<-xmlFtp.getRecords) yield record.getField("LogLocationFTPURL__c")).toList.head.toString
 
