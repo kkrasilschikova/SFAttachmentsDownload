@@ -16,3 +16,11 @@ Curl.exe is already included in download.jar, no need to download it manually.
 *java -jar download.jar 12345678*
 
 OR simply download [download.jar](https://github.com/kkrasilschikova/SFAttachmentsDownload/blob/master/download.jar) and start it with parameter case number, example: *java -jar download.jar 12345678*.
+
+#### How to generate SalesForce security token
+
+1) login to SalesForce
+2) in the top right corner click on your name -> My settings
+3) click Personal -> Reset My Security Token, or enter 'reset' in quick find
+
+You'll receive an e-mail with a new token.
