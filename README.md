@@ -15,4 +15,4 @@ Curl.exe is already included in download.jar, no need to download it manually.
 - run resulting jar with parameter case number, example:
 *java -jar download.jar 12345678*
 
-OR simply download [download.jar file](https://github.com/kkrasilschikova/SFAttachmentsDownload/target/scala-2.12/download.jar) and start it with parameter case number.
+OR simply download [download.jar file](https://github.com/kkrasilschikova/SFAttachmentsDownload/download.jar) and start it with parameter case number.
