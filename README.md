@@ -3,7 +3,7 @@
 Download all Customer's attachments (that are displayed as separate emails) to current folder and upload them on ftp.
 
 #### Prerequisites:
-Java should be installed to run download.jar file.
+Java should be installed to run download.jar file.  
 FTP for case should be created in advance.  
 SALESFORCE_USERNAME and SALESFORCE_PASSWORD environment variables.  
 SALESFORCE_PASSWORD should have a format like passwordSecurityToken.  
