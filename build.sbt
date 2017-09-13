@@ -43,6 +43,3 @@ assemblyMergeStrategy in assembly := {
       }
     case _ => MergeStrategy.deduplicate
   }
-
-
-        
