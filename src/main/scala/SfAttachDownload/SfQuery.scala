@@ -1,10 +1,11 @@
 package SfAttachDownload
 
-import scala.util.Try
-import scala.annotation.tailrec
 import com.sforce.soap.partner.{PartnerConnection, QueryResult}
+
+import scala.annotation.tailrec
+import scala.util.Try
 class SfQuery {
-  def prepareResults(connection: Try[PartnerConnection], caseNumber: String): (List[List[String]], String)= {
+  def prepareResults(connection: Try[PartnerConnection], caseNumber: String): (List[List[String]], Option[String]) = {
 
     //find all emails, then filter only that are attachments
     val xmlResult: QueryResult = connection.get
@@ -26,17 +27,24 @@ class SfQuery {
     }
 
     val links: List[String] = getLinks(allRecords, List())
-    if (links.isEmpty) throw new Exception("Case doesn't have any attachments.")
+    if (links.isEmpty) throw new Exception("Case doesn't have any attachments.") //exit program if there is no attachments
     val allLinks: List[String] = links.map(_.replace(">", "\n"))
 
     val regex = "'http.*'".r
     val listOfLinks: List[List[String]] = allLinks.map(x=>regex.findAllIn(x).toList.map(_.replace("'", "")))
 
-    //find ftp link with password
+    //find ftp link with credentials
     val xmlFtp: QueryResult = connection.get.query(s"Select LogLocationFtpURL__c from Case where CaseNumber='$caseNumber'")
-    val ftp: String =(for (record<-xmlFtp.getRecords) yield record.getField("LogLocationFTPURL__c")).toList.head.toString
+    val optionFtp: Object = (for (record<-xmlFtp.getRecords) yield record.getField("LogLocationFTPURL__c")).toList.head
+    val ftp: Option[String] = optionFtp match {
+      case x: String =>
+        println(s"Ftp for case $caseNumber is $x\n")
+        Some(x)
+      case null =>
+        println(s"Ftp for case $caseNumber doesn't exist.")
+        None
+    }
 
-    println(s"Ftp for case $caseNumber is $ftp\n")
     (listOfLinks, ftp)
   }
 }
