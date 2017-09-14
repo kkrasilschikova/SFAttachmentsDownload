@@ -4,10 +4,9 @@ Download all Customer's attachments (that are displayed as separate emails) to c
 
 #### Prerequisites:
 Java should be installed to run download.jar file.  
-FTP for case should be created in advance.  
+FTP for case should be created in advance, if you need to upload attachments to ftp.  
 SALESFORCE_USERNAME and SALESFORCE_PASSWORD environment variables.  
 SALESFORCE_PASSWORD should have a format like passwordSecurityToken.  
-Curl.exe is already included in download.jar, no need to download it manually.
 
 #### In order to run the program
 
