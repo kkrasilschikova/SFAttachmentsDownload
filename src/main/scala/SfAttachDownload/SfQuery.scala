@@ -40,7 +40,7 @@ class SfQuery {
       case x: String =>
         println(s"Ftp for case $caseNumber is $x\n")
         Some(x)
-      case null =>
+      case _ =>
         println(s"Ftp for case $caseNumber doesn't exist.")
         None
     }
