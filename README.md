@@ -6,7 +6,8 @@ Download all Customer's attachments (that are displayed as separate emails) to c
 Java should be installed to run download.jar file.  
 FTP for case should be created in advance, if you need to upload attachments to ftp.  
 SALESFORCE_USERNAME and SALESFORCE_PASSWORD environment variables.  
-SALESFORCE_PASSWORD should have a format like passwordSecurityToken.  
+SALESFORCE_PASSWORD should have a format like passwordSecurityToken.
+For non-Windows OS: check that curl is installed.
 
 #### In order to run the program
 
