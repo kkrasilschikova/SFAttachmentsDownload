@@ -40,7 +40,7 @@ class SfDownload {
         s"curl -k -o $fileName $link".! //download locally
         if (listOfLinksAndFtp._2.isDefined) {
           println(s"\nUploading $fileName to ftp")
-          s"curl -k -T --fail $fileName ${listOfLinksAndFtp._2.get}".! //upload to ftp
+          s"curl -k -T $fileName ${listOfLinksAndFtp._2.get}".! //upload to ftp
         }
       }
     }
