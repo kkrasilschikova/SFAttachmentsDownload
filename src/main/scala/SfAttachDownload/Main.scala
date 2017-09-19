@@ -19,7 +19,7 @@ object Main {
 
       //download attachments locally and upload to ftp, if it exists
       val down = new SfDownload
-      down.download(listOfLinksAndFtp)
+      down.download(listOfLinksAndFtp, caseNumber)
     }
     else {
       println(s"\nWrong parameters! Please specify case number.\n")
