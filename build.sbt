@@ -11,6 +11,7 @@ mainClass in assembly := Some("SfAttachDownload.Main")
 assemblyJarName in assembly := "download.jar"
 
 libraryDependencies += "com.force.api" % "force-partner-api" % "40.0.0"
+libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.0"
 
 assemblyMergeStrategy in assembly := {
   case PathList("javax", "servlet", xs @ _*)         => MergeStrategy.first
