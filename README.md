@@ -1,4 +1,4 @@
-# salesforce-attachments-download
+# SfAttachDownload
 #### Purpose:
 Download all Customer's attachments (that are displayed as separate emails) to current folder (where folder called case number will be created) and upload them on ftp.
 
