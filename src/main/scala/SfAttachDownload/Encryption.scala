@@ -4,6 +4,7 @@ import java.io._
 import java.nio.charset.StandardCharsets
 import java.nio.file.{FileSystems, Files, Path, StandardCopyOption}
 
+import SfAttachDownload.JSONConverter.{credsReads, credsWrites}
 import play.api.libs.json.{JsError, JsSuccess, JsValue, Json}
 
 import scala.sys.process._
