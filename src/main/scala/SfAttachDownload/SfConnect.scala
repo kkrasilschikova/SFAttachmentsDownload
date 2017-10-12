@@ -2,6 +2,7 @@ package SfAttachDownload
 
 import com.sforce.soap.partner.PartnerConnection
 import com.sforce.ws.ConnectorConfig
+
 import scala.util.{Failure, Success, Try}
 
 class SfConnect {
@@ -34,6 +35,22 @@ class SfConnect {
         .split(servicesEndpointSuffix)
         .headOption
         .fold[Try[String]](Failure(new Error("Could not parse the instance url")))(Success(_))
+    } yield connection
+  }
+
+  def windowsConnect(username: String, password: String): Try[PartnerConnection] = {
+    val servicesEndpointSuffix = "services/Soap/u/40.0/"
+    val authEndPoint = "https://login.salesforce.com/" + servicesEndpointSuffix
+
+    val config: ConnectorConfig = {
+      new ConnectorConfig() {
+        setUsername(username)
+        setPassword(password)
+        setAuthEndpoint(authEndPoint)
+      }
+    }
+
+    for {connection<- Try(new PartnerConnection(config))
     } yield connection
   }
 
