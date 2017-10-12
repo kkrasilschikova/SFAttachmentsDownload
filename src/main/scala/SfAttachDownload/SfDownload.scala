@@ -25,7 +25,7 @@ class SfDownload {
     val caseDir = if (!currentDir.endsWith(caseNumber)) {
       val folderCaseNum = new File(s"$currentDir\\$caseNumber")
       if (folderCaseNum.mkdir) folderCaseNum else currentDir
-    }
+    } else currentDir
 
     //download attachments locally and on ftp, if it exists
     println(s"Local folder for downloading file(s) is $caseDir")
