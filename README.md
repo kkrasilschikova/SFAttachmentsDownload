@@ -16,7 +16,7 @@ SALESFORCE_PASSWORD should have a format like passwordSecurityToken.
 - Windows, all subsequent runs: *java -jar download.jar -c 12345678*
 - Linux: *java -jar download.jar -c 12345678*  
 
-##### salesforce-attachments-download usage:
+#### salesforce-attachments-download usage:
 
   -c, --caseNumber \<8_digit_value> required  
   -d, --destinationFolder \<target_for_downloads> optional, by default current_dir\case_number  
