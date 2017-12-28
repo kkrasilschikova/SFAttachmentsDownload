@@ -2,7 +2,6 @@ package SfAttachDownload
 
 import com.sforce.soap.partner.PartnerConnection
 import com.sforce.ws.ConnectorConfig
-
 import scala.util.{Failure, Success, Try}
 
 class SfConnect {
