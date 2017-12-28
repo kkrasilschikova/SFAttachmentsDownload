@@ -16,7 +16,6 @@ libraryDependencies += "com.force.api" % "force-partner-api" % "40.0.0"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.0"
 libraryDependencies += "com.github.scopt" %% "scopt" % "3.7.0"
 libraryDependencies += "org.typelevel" %% "cats-core" % "1.0.0-RC1"
-libraryDependencies += "org.typelevel" %% "cats-effect" % "0.5"
 libraryDependencies += "commons-io" % "commons-io" % "2.4"
 libraryDependencies += "commons-net" % "commons-net" % "3.6"
 
