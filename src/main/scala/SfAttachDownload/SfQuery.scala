@@ -6,7 +6,7 @@ import scala.annotation.tailrec
 import scala.util.{Failure, Success, Try}
 
 class SfQuery {
-  def prepareResults(connection: Try[PartnerConnection], caseNumber: String): (List[List[String]], Option[String]) = {
+  def prepareResults(connection: Try[PartnerConnection], caseNumber: String, latest: Int): List[List[String]] = {
 
     //find all emails, then filter only that are attachments
     val xmlResult: QueryResult = connection.get
@@ -31,30 +31,32 @@ class SfQuery {
         }
 
         val links: List[String] = getLinks(allRecords, List())
-        if (links.isEmpty) println("Case doesn't have any attachments.");System.exit(1) //exit program if there is no attachments
+        if (links.isEmpty) {println("Case doesn't have any attachments.");System.exit(1)} //exit program if there is no attachments
       val allLinks: List[String] = links.map(_.replace(">", "\n"))
 
         val regex = "'http.*'".r
         val listOfLinks: List[List[String]] = allLinks.map(x => regex.findAllIn(x).toList.map(_.replace("'", "")))
 
-        //find ftp link with credentials
-        val xmlFtp: QueryResult = connection.get.query(s"Select LogLocationFtpURL__c from Case where CaseNumber='$caseNumber'")
-        val optionFtp: Object = (for (record <- xmlFtp.getRecords) yield record.getField("LogLocationFTPURL__c")).toList.head
-        val ftp: Option[String] = optionFtp match {
-          case x: String =>
-            println(s"Ftp for case $caseNumber is $x\n")
-            Some(x)
-          case _ =>
-            println(s"Ftp for case $caseNumber doesn't exist.")
-            None
-        }
+        if (latest == 1) List(listOfLinks.head) else if (latest == 0) List(listOfLinks.last) else listOfLinks
 
-        (listOfLinks, ftp)
-
-      case Failure(ex) =>
+      case Failure(_) =>
         println("Case number is incorrect or there are no emails.")
         System.exit(1)
-        (List(), None)
+        List()
+    }
+  }
+
+  def getFtp(connection: Try[PartnerConnection], caseNumber: String): Option[String] = {
+    //find ftp link with credentials
+    val xmlFtp: QueryResult = connection.get.query(s"Select LogLocationFtpURL__c from Case where CaseNumber='$caseNumber'")
+    val optionFtp: Object = (for (record <- xmlFtp.getRecords) yield record.getField("LogLocationFTPURL__c")).toList.head
+    optionFtp match {
+      case x: String =>
+        println(s"Ftp for case $caseNumber is $x")
+        Some(x)
+      case _ =>
+        println(s"Ftp for case $caseNumber doesn't exist.")
+        None
     }
   }
 
